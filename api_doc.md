@@ -6,10 +6,10 @@
 
 #### Game Room
 
-- **GET** `/gamerooms`
-- **GET** `/gamerooms/:id`
-- **PATCH** `/gamerooms/:id`
-- **PATCH** `/gamerooms/:id/reset`
+- **GET** `/game-rooms`
+- **GET** `/game-rooms/:id`
+- **PUT** `/game-rooms/:id`
+- **PUT** `/game-rooms/:id/reset`
 
 #### Gemini
 
@@ -17,7 +17,7 @@
 
 ---
 
-### 1. GET `/gamerooms`
+### 1. GET `/game-rooms`
 
 **Description:**  
 Retrieve all available game rooms.
@@ -35,8 +35,9 @@ No parameters required.
       "id": 1,
       "player1": "string",
       "player2": "string",
-      "isFull": false
-    }
+      "isFull": true
+    },
+    ...
   ]
   ```
 
@@ -72,7 +73,7 @@ Retrieve a single game room by its ID.
     "id": 1,
     "player1": "string",
     "player2": "string",
-    "isFull": false
+    "isFull": true
   }
   ```
 
@@ -93,7 +94,7 @@ Retrieve a single game room by its ID.
 
 ---
 
-### 3. PATCH `/gamerooms/:id`
+### 3. PUT `/gamerooms/:id`
 
 **Description:**  
 Join a game room by updating it with a player's name.
@@ -153,7 +154,7 @@ Join a game room by updating it with a player's name.
 
 ---
 
-### 4. PATCH `/gamerooms/:id/reset`
+### 4. PUT `/game-rooms/:id/reset`
 
 **Description:**  
 Reset a specific game room to its initial state (clears players and sets `isFull` to `false`).

@@ -32,7 +32,10 @@ class ControllerGameRoom {
       if (!room) {
         throw { name: "NotFound", message: `Room id ${id} not found` };
       }
-      if (room.isFull) {
+      // 1 minute and 30 seconds
+      if (room.updatedAt < new Date(Date.now() - 60 * 1000)) {
+        await room.update({ player1: null, player2: null, isFull: false });
+      } else if (room.isFull) {
         throw { name: "BadRequest", message: `Room id ${id} is full` };
       }
       if (!room.player1) {

@@ -25,9 +25,16 @@ app.use("/", router);
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
-  socket.on("ping", (data) => {
-    console.log("Ping received from client", data);
-    socket.emit("pong");
+  socket.on("joinRoom", (data) => {
+    socket.join(data.room);
+    console.log(`User ${socket.id} joined room ${data.room}`);
+    
+    socket.to(data.room).emit("playerJoined", data);
+  });
+
+  socket.on("scoreUpdate", (data) => {
+    console.log(`Score update from room ${data.room}:`, data);    
+    socket.to(data.room).emit(`${data.playerNumber}ScoreUpdated`, data);
   });
 
   socket.on("disconnect", () => {

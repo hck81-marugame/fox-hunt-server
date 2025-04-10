@@ -11,7 +11,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://marugame.azriltdkso.fun",
   },
 });
 const PORT = 3000;
@@ -28,12 +28,12 @@ io.on("connection", (socket) => {
   socket.on("joinRoom", (data) => {
     socket.join(data.room);
     console.log(`User ${socket.id} joined room ${data.room}`);
-    
+
     socket.to(data.room).emit("playerJoined", data);
   });
 
   socket.on("scoreUpdate", (data) => {
-    console.log(`Score update from room ${data.room}:`, data);    
+    console.log(`Score update from room ${data.room}:`, data);
     socket.to(data.room).emit(`${data.playerNumber}ScoreUpdated`, data);
   });
 

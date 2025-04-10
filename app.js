@@ -14,7 +14,7 @@ const io = new Server(server, {
     origin: "https://marugame.azriltdkso.fun",
   },
 });
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
